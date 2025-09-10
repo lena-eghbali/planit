@@ -1,0 +1,132 @@
+@import "tailwindcss";
+/* این برای تیترای برگه‌های تست */
+
+/* اینجا یسری یوتیلیتی که لازم داشتم رو خودم نوشتم
+   خیلی حرفه‌ای نه، فقط همونی که کارمو راه بندازه :) */
+@layer utilities {
+
+  /* بک‌گراند ستاره‌ای – همون حالت شب */
+  .bg-setare{
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.7) 50%, transparent 51%),
+      radial-gradient(1.6px 1.6px at 120px 90px, rgba(255,255,255,.6) 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 200px 60px, rgba(255,255,255,.5) 50%, transparent 51%),
+      radial-gradient(1.8px 1.8px at 260px 160px, rgba(255,255,255,.6) 50%, transparent 51%);
+    background-size: 220px 220px, 280px 280px, 260px 260px, 320px 320px;
+    background-repeat: repeat;
+    opacity: .5;
+  }
+
+  /* آدمکا یه کم بالا پایین بشن که خشک نباشه */
+  .floaty{ animation: floaty 5s ease-in-out infinite; }
+  @keyframes floaty{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-10px) } }
+
+  /* انیمیشن موشک (صفحه اصلی) – فعلاً نگه داشتم */
+  .rocket-go{ animation: rocketGo 2.2s linear forwards; }
+  @keyframes rocketGo{
+    0%   { transform: translate(0,0) rotate(10deg); opacity:1; }
+    100% { transform: translate(-260px,-460px) rotate(-20deg); opacity:0; }
+  }
+
+  /* نقطه‌ی سیاره + حالت انتخابی */
+  .planet-dot-base{
+    width: 16px; height: 16px; border-radius: 9999px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.15);
+  }
+  .is-current{
+    transform: scale(1.25);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.25), 0 0 16px rgba(255,255,255,.25);
+  }
+
+  /* مدار خیلی آروم بچرخه */
+  .spin-slow { animation: spin360 60s linear infinite; }
+  @keyframes spin360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* سفینه نرم حرکت کنه (وقتی میره روی نقطه) */
+  .ship-smooth { transition: transform 600ms ease; will-change: transform; }
+}
+/* اینجا ابزارای ساده خودمو کاشتم واسه مدار قشنگ‌تر */
+@layer utilities {
+  /* مدار آروم بچرخه */
+  .spin-slow { animation: spin360 60s linear infinite; }
+  @keyframes spin360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* خط‌ حلقه‌ها رو پررنگ‌تر می‌کنم */
+  .ring-strong  { border-color: rgba(255,255,255,.35); }
+  .ring-faint   { border-color: rgba(255,255,255,.18); }
+
+  /* یه درخشش خیلی ملایم دور حلقه‌ها */
+  .ring-glow { box-shadow: 0 0 20px rgba(255,255,255,.12) inset; }
+
+  /* دات‌های سیاره‌ها */
+  .planet-dot-base{ width:16px; height:16px; border-radius:9999px; }
+  .dot-dim{ opacity:.5; box-shadow:0 0 0 2px rgba(255,255,255,.12); transition:transform .25s, opacity .25s, box-shadow .25s; }
+  .dot-active{ opacity:1; transform: scale(1.35); box-shadow:0 0 0 2px rgba(255,255,255,.25), 0 0 16px rgba(255,255,255,.25); }
+}
+/* === فقط ستاره‌ها (بدون گرادینت) برای وقتی می‌خوام داخل یه سکشن هم ستاره داشته باشم === */
+.bg-stars-only{
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 22%, rgba(255,255,255,.65) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 12%, rgba(255,255,255,.55) 50%, transparent 51%),
+    radial-gradient(1.1px 1.1px at 32% 72%, rgba(255,255,255,.6) 50%, transparent 51%),
+    radial-gradient(0.9px 0.9px at 62% 42%, rgba(255,255,255,.5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 25% 50%, rgba(255,255,255,.45) 50%, transparent 51%);
+  background-size:
+    400px 400px,
+    500px 500px,
+    350px 350px,
+    600px 600px,
+    700px 700px;
+  background-repeat: repeat;
+  pointer-events: none;
+  opacity: .6;
+}
+
+.custom-content {
+  font-size: 2rem;      /* بزرگ‌تر از معمول (تقریباً text-lg) */
+  line-height: 5;          /* فاصله خطی بیشتر برای خوانایی */
+  padding-right: 1.5rem;   /* فاصله از سمت راست (24px) */
+  padding-left: 1.5rem;    /* اگه خواستی سمت چپ هم یه بالانس داشته باشه */
+  max-width: 60ch;         /* عرض متن خیلی پهن نشه */
+  margin: 0 auto;          /* متن وسط‌چین بشه */
+  color: #ffffff;          /* رنگ متن سفید */
+  margin-top: 15px;
+}
+/* پس‌زمینه و قاب کلی فرم */
+.nf-form-cont {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem; /* گردی مثل کارت‌ها */
+  padding: 2rem;
+  color: #fff;
+}
+
+/* فیلدهای ورودی */
+.nf-form-cont input,
+.nf-form-cont textarea,
+.nf-form-cont select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* دکمه ارسال */
+.nf-form-cont input[type=submit] {
+  background: #fff;
+  color: #6d28d9; /* بنفش پررنگ مثل دکمه‌های سایت */
+  font-weight: bold;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nf-form-cont input[type=submit]:hover {
+  background: #f3e8ff; /* بنفش خیلی روشن */
+  color: #4c1d95;      /* بنفش تیره‌تر */
+}
