@@ -196,44 +196,7 @@ $ls_key  = 'planit_tasks_v1_' . ( $user_id ? $user_id : 'guest' );
       return ok;
     });
 
-    // خروجی DOM
-    $list.innerHTML = '';
-    if(!list.length){
-      $list.innerHTML = '<li class="text-white/60">فعلا چیزی اینجا نیست…</li>';
-      return;
-    }
 
-    list.forEach(function(i){
-      var li = document.createElement('li');
-      li.className = 'rounded-2xl bg-white/10 border border-white/15 px-4 py-3 flex items-center gap-3';var cb = document.createElement('input');
-      cb.type='checkbox';
-      cb.checked = !!i.done;
-      cb.className='w-5 h-5 accent-purple-500';
-      cb.addEventListener('change', function(){ i.done = cb.checked; save(); render(); });
-
-      var info = document.createElement('div');
-      info.className='flex-1';
-      var title = document.createElement('div');
-      title.className = 'font-semibold ' + (i.done ? 'line-through text-white/60' : '');
-      title.textContent = i.text;
-      var meta = document.createElement('div');
-      meta.className='text-xs text-white/70 mt-1';
-      var pr = (i.prio==='high'?'اولویت زیاد':i.prio==='low'?'اولویت کم':'اولویت معمولی');
-      meta.textContent = (i.cat?('دسته: '+i.cat+' · '):'') + pr + (i.due?(' · موعد: '+i.due):'');
-
-      info.appendChild(title); info.appendChild(meta);
-
-      var del = document.createElement('button');
-      del.className='px-3 py-1 rounded-lg bg-white/10 border border-white/20 text-sm';
-      del.textContent='حذف';
-      del.addEventListener('click', function(){
-        tasks = tasks.filter(function(x){ return x.id !== i.id; });
-        save(); render();
-      });
-
-      li.appendChild(cb); li.appendChild(info); li.appendChild(del);
-      $list.appendChild(li);
-    });
   }
 
   render();
