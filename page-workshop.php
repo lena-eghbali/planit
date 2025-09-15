@@ -1,128 +1,94 @@
-<<<<<<< HEAD
 <?php
-/* Template Name: Workshops */
+/* Template Name: Workshops (Planit) */
 if ( ! defined('ABSPATH') ) exit;
 get_header();
-
-// — تیتر و زیرتیتر (اگه خواستی زیرتیتر دستی بدی)
-$subtitle = get_post_meta(get_the_ID(), 'planit_subtitle', true);
 ?>
+<main class="text-white" dir="rtl">
 
-<section class="relative py-14 text-white overflow-hidden">
-  <!-- ستاره‌ها فقط توی این سکشن -->
-  <div class="absolute inset-0 -z-10 bg-stars-only"></div>
+  <section class="relative py-12">
+    <div class="absolute inset-0 -z-10 bg-stars-only"></div>
+    <div class="max-w-5xl mx-auto px-6">
+      <header class="text-center mb-10">
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-2"><?php the_title(); ?></h1>
+        <?php if (has_excerpt()): ?>
+          <p class="text-white/80 leading-8 max-w-2xl mx-auto"><?php echo get_the_excerpt(); ?></p>
+        <?php endif; ?>
+      </header>
 
-  <div class="max-w-6xl mx-auto px-6">
-    <!-- تیتر اصلی صفحه -->
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-center"><?php the_title(); ?></h1>
-    <?php if($subtitle): ?>
-      <p class="text-center text-white/80 max-w-2xl mx-auto"><?php echo esc_html($subtitle); ?></p>
-    <?php endif; ?>
-  </div>
-</section>
-
-<?php
-// — اینجا می‌گم بچه‌های همین برگه رو بیار (یعنی ورکشاپ‌ها)
-$q = new WP_Query([
-  'post_type'   => 'page',
-  'post_parent' => get_the_ID(),
-  'orderby'     => 'menu_order',
-  'order'       => 'ASC',
-  'posts_per_page' => -1,
-]);
-?>
-
-<section class="relative text-white overflow-hidden">
-  <div class="absolute inset-0 -z-10 bg-stars-only"></div>
-
-  <div class="max-w-6xl mx-auto px-6 pb-16">
-    <?php if ( $q->have_posts() ): ?>
-      <!-- کارت‌ها تو گرید مرتب -->
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <?php while ( $q->have_posts() ): $q->the_post(); ?>
-          <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
-            <h2 class="text-2xl font-extrabold mb-2"><?php the_title(); ?></h2>
-            <p class="text-white/80 text-sm mb-4"><?php echo get_the_excerpt(); ?></p>
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-white/70">
-                <?php echo get_post_meta(get_the_ID(), 'work_time', true) ? esc_html(get_post_meta(get_the_ID(), 'work_time', true)) : '۲ ساعت آنلاین'; ?>
-              </span>
-              <a href="<?php the_permalink(); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold">بیشتر</a>
-            </div>
-          </article>
-        <?php endwhile; wp_reset_postdata(); ?>
+
+        <!-- کارت 1 -->
+        <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
+          <h3 class="text-xl font-bold mb-2">برنامه‌ریزی شخصی 101</h3>
+          <p class="text-white/75 text-sm leading-7 mb-4">روتین‌سازی و چیدن پلن روزانه به ساده‌ترین شکل.</p>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+            <span class="text-white/70">۹۰ دقیقه</span>
+            <a href="<?php echo esc_url( home_url('/contact') ); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold text-center sm:w-auto w-full">ثبت‌نام</a>
+          </div>
+        </article>
+
+        <!-- کارت 2 -->
+        <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
+          <h3 class="text-xl font-bold mb-2">مدیریت زمان (دانش‌آموز/دانشجو)</h3>
+          <p class="text-white/75 text-sm leading-7 mb-4">بلوک‌بندی، ددلاین واقعی و تکنیک ۲۵ دقیقه‌ای.</p>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+            <span class="text-white/70">۲ ساعت</span>
+            <a href="<?php echo esc_url( home_url('/contact') ); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold text-center sm:w-auto w-full">ثبت‌نام</a>
+          </div>
+        </article>
+
+        <!-- کارت 3 -->
+        <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
+          <h3 class="text-xl font-bold mb-2">گیمیفیکیشن برای عادت‌ها</h3>
+          <p class="text-white/75 text-sm leading-7 mb-4">بج، استریک و امتیاز برای حفظ انگیزه.</p>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+            <span class="text-white/70">۲ ساعت</span>
+            <a href="<?php echo esc_url( home_url('/contact') ); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold text-center sm:w-auto w-full">ثبت‌نام</a>
+          </div>
+        </article>
+
+        <!-- کارت 4 -->
+        <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
+          <h3 class="text-xl font-bold mb-2">طراحی پلنر (UI دستی)</h3>
+          <p class="text-white/75 text-sm leading-7 mb-4">جلد، رنگ، شبکه‌بندی صفحات — ساده و قشنگ.</p>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+            <span class="text-white/70">۹۰ دقیقه</span>
+            <a href="<?php echo esc_url( home_url('/contact') ); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold text-center sm:w-auto w-full">ثبت‌نام</a>
+          </div>
+        </article>
+
+        <!-- کارت 5 -->
+        <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
+          <h3 class="text-xl font-bold mb-2">بهره‌وری دیجیتال</h3>
+          <p class="text-white/75 text-sm leading-7 mb-4">هماهنگ‌کردن ابزارهای آنلاین با پلنر کاغذی.</p><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+            <span class="text-white/70">۹۰ دقیقه</span>
+            <a href="<?php echo esc_url( home_url('/contact') ); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold text-center sm:w-auto w-full">ثبت‌نام</a>
+          </div>
+        </article>
+
+        <!-- کارت 6 -->
+        <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
+          <h3 class="text-xl font-bold mb-2">هدف‌گذاری گروهی</h3>
+          <p class="text-white/75 text-sm leading-7 mb-4">تقسیم کار و پیگیری شفاف برای تیم‌های کوچک.</p>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+            <span class="text-white/70">۲ ساعت</span>
+            <a href="<?php echo esc_url( home_url('/contact') ); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold text-center sm:w-auto w-full">رزرو تیمی</a>
+          </div>
+        </article>
+
       </div>
-    <?php else: ?>
-      <!-- اگه هنوز ورکشاپ نساختم -->
-      <div class="rounded-2xl bg-white/10 border border-white/10 p-8 text-center">
-        <p class="text-white/80">فعلاً هیچ ورکشاپی اضافه نکردم. برگه‌های فرزندِ «Workshops» رو بسازم، اینجا خودش میاد.</p>
+      <!-- /grid -->
+
+      <!-- نکته: اگر خواستی CTA کلی هم پایین بگذاری -->
+      <!--
+      <div class="text-center mt-10">
+        <a href="<?php echo esc_url( home_url('/contact') ); ?>"
+           class="inline-block px-5 py-3 rounded-2xl bg-white text-purple-700 font-bold">
+          هماهنگی ورکشاپ اختصاصی
+        </a>
       </div>
-    <?php endif; ?>
-  </div>
-</section>
-
-=======
-<?php
-/* Template Name: Workshops */
-if ( ! defined('ABSPATH') ) exit;
-get_header();
-
-// — تیتر و زیرتیتر (اگه خواستی زیرتیتر دستی بدی)
-$subtitle = get_post_meta(get_the_ID(), 'planit_subtitle', true);
-?>
-
-<section class="relative py-14 text-white overflow-hidden">
-  <!-- ستاره‌ها فقط توی این سکشن -->
-  <div class="absolute inset-0 -z-10 bg-stars-only"></div>
-
-  <div class="max-w-6xl mx-auto px-6">
-    <!-- تیتر اصلی صفحه -->
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-center"><?php the_title(); ?></h1>
-    <?php if($subtitle): ?>
-      <p class="text-center text-white/80 max-w-2xl mx-auto"><?php echo esc_html($subtitle); ?></p>
-    <?php endif; ?>
-  </div>
-</section>
-
-<?php
-// — اینجا می‌گم بچه‌های همین برگه رو بیار (یعنی ورکشاپ‌ها)
-$q = new WP_Query([
-  'post_type'   => 'page',
-  'post_parent' => get_the_ID(),
-  'orderby'     => 'menu_order',
-  'order'       => 'ASC',
-  'posts_per_page' => -1,
-]);
-?>
-
-<section class="relative text-white overflow-hidden">
-  <div class="absolute inset-0 -z-10 bg-stars-only"></div>
-
-  <div class="max-w-6xl mx-auto px-6 pb-16">
-    <?php if ( $q->have_posts() ): ?>
-      <!-- کارت‌ها تو گرید مرتب -->
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <?php while ( $q->have_posts() ): $q->the_post(); ?>
-          <article class="rounded-2xl bg-white/10 border border-white/10 p-6 shadow-soft hover:bg-white/15 transition">
-            <h2 class="text-2xl font-extrabold mb-2"><?php the_title(); ?></h2>
-            <p class="text-white/80 text-sm mb-4"><?php echo get_the_excerpt(); ?></p>
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-white/70">
-                <?php echo get_post_meta(get_the_ID(), 'work_time', true) ? esc_html(get_post_meta(get_the_ID(), 'work_time', true)) : '۲ ساعت آنلاین'; ?>
-              </span>
-              <a href="<?php the_permalink(); ?>" class="px-3 py-2 rounded-xl bg-white text-purple-700 font-semibold">بیشتر</a>
-            </div>
-          </article>
-        <?php endwhile; wp_reset_postdata(); ?>
-      </div>
-    <?php else: ?>
-      <!-- اگه هنوز ورکشاپ نساختم -->
-      <div class="rounded-2xl bg-white/10 border border-white/10 p-8 text-center">
-        <p class="text-white/80">فعلاً هیچ ورکشاپی اضافه نکردم. برگه‌های فرزندِ «Workshops» رو بسازم، اینجا خودش میاد.</p>
-      </div>
-    <?php endif; ?>
-  </div>
-</section>
-
->>>>>>> 5a496a83febc32bbd98db395553402a3fa3b07c5
+      -->
+    </div>
+  </section>
+</main>
 <?php get_footer(); ?>
